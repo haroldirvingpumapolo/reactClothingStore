@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ShowProducts from "./Components/ShowProducts";
-import dataArrButtons from "./Components/dataArrButtons";
+import dataArrButtons from "./data/dataArrButtons";
 import FilterButtons from "./Components/FilterButtons";
 import ShoppingCar from "./Components/ShoppingCar";
 
 function App() {
   const [products, setProducts] = useState([]);
-  const [buttons, setButtons] = useState([]);
+  const [buttons, setButtons] = useState(dataArrButtons);
   const [sizes, setSizes] = useState([]);
   const [shoppingCar, setShoppingCar] = useState([]);
 
@@ -17,7 +17,6 @@ function App() {
       .then((res) => {
         setProducts(res.data.products);
       });
-    setButtons(dataArrButtons);
   }, []);
 
   function handleSizeClick(size) {
@@ -33,7 +32,7 @@ function App() {
       : setSizes([...sizes, size]);
   }
 
-  function addCar(product) {
+  function addProductItemToCar(product) {
     shoppingCar.some((item) => item.sku === product.sku)
       ? setShoppingCar(
           shoppingCar.map((itemShoppingCar) =>
@@ -44,7 +43,7 @@ function App() {
         )
       : setShoppingCar([...shoppingCar, { ...product, quantify: 1 }]);
   }
-  
+
   function onSumOrSubtract(skuValue, sumOrSubtract) {
     setShoppingCar(
       shoppingCar.map((itemShoppingCar) =>
@@ -73,7 +72,7 @@ function App() {
       <ShowProducts
         dataShowProducts={products}
         dataSizes={sizes}
-        onAddCar={addCar}
+        onAddProductItemToCar={addProductItemToCar}
       />
       <ShoppingCar
         shoppingCar={shoppingCar}

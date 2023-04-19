@@ -1,7 +1,7 @@
 import React from "react";
 import Product from "./Product";
 
-function ShowProducts({ dataShowProducts, dataSizes, onAddCar }) {
+function ShowProducts({ dataShowProducts, dataSizes, onAddProductItemToCar }) {
   return (
     <div className="flex flex-col w-full items-center">
       <div className="flex w-full justify-start">
@@ -23,7 +23,7 @@ function ShowProducts({ dataShowProducts, dataSizes, onAddCar }) {
                 price={product.price}
                 installments={product.installments}
                 completeProduct={product}
-                onAddCar={onAddCar}
+                onAddProductItemToCar={onAddProductItemToCar}
               />
             </div>
           ))}

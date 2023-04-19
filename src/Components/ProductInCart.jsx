@@ -27,7 +27,7 @@ function ProductInCart({
       <div className="flex content-between justify-between text-xl">
         <img
           className=""
-          src={`/src/assets/products/${sku}-1-cart.webp`}
+          src={`/../assets/products/${sku}-1-cart.webp`}
           alt={`${sku}`}
         />
         <div className="flex flex-col content-around ">
