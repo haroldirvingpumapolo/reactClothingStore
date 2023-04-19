@@ -3,11 +3,13 @@ import axios from "axios";
 import ShowProducts from "./Components/ShowProducts";
 import dataArrButtons from "./Components/dataArrButtons";
 import FilterButtons from "./Components/FilterButtons";
+import ShoppingCar from "./Components/ShoppingCar";
 
 function App() {
   const [products, setProducts] = useState([]);
   const [buttons, setButtons] = useState([]);
   const [sizes, setSizes] = useState([]);
+  const [shoppingCar, setShoppingCar] = useState([]);
 
   useEffect(() => {
     axios
@@ -31,13 +33,53 @@ function App() {
       : setSizes([...sizes, size]);
   }
 
+  function addCar(product) {
+    shoppingCar.some((item) => item.sku === product.sku)
+      ? setShoppingCar(
+          shoppingCar.map((itemShoppingCar) =>
+            itemShoppingCar.sku === product.sku
+              ? { ...itemShoppingCar, quantify: itemShoppingCar.quantify + 1 }
+              : itemShoppingCar
+          )
+        )
+      : setShoppingCar([...shoppingCar, { ...product, quantify: 1 }]);
+  }
+  
+  function onSumOrSubtract(skuValue, sumOrSubtract) {
+    setShoppingCar(
+      shoppingCar.map((itemShoppingCar) =>
+        itemShoppingCar.sku === skuValue
+          ? {
+              ...itemShoppingCar,
+              quantify: itemShoppingCar.quantify + sumOrSubtract,
+            }
+          : itemShoppingCar
+      )
+    );
+  }
+
+  function removeProductShoppingCar(skuValue) {
+    setShoppingCar(
+      shoppingCar.filter((itemShoppingCar) => itemShoppingCar.sku !== skuValue)
+    );
+  }
+
   return (
     <div className="flex items-start select-none mt-24">
       <FilterButtons
         dataButtons={buttons}
         onHandleSizeClick={handleSizeClick}
       />
-      <ShowProducts dataShowProducts={products} dataSizes={sizes} />
+      <ShowProducts
+        dataShowProducts={products}
+        dataSizes={sizes}
+        onAddCar={addCar}
+      />
+      <ShoppingCar
+        shoppingCar={shoppingCar}
+        onRemoveProductShoppingCar={removeProductShoppingCar}
+        onSumOrSubtract={onSumOrSubtract}
+      />
     </div>
   );
 }

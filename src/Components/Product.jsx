@@ -6,6 +6,8 @@ function Product({
   currencyFormat,
   price,
   installments,
+  onAddCar,
+  completeProduct,
 }) {
   const [hovered, setHovered] = useState(false);
 
@@ -28,6 +30,7 @@ function Product({
         className={`w-full h-14 text-white  ${
           hovered ? "bg-yellow-400" : "bg-gray-800"
         }`}
+        onClick={() => onAddCar(completeProduct)}
       >
         Add to cart
       </button>
