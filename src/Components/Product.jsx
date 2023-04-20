@@ -6,6 +6,8 @@ function Product({
   currencyFormat,
   price,
   installments,
+  onAddProductItemToCar,
+  completeProduct,
 }) {
   const [hovered, setHovered] = useState(false);
 
@@ -16,7 +18,7 @@ function Product({
       onMouseLeave={() => setHovered(false)}
     >
       <img
-        src={`/src/assets/products/${sku}-${hovered ? 2 : 1}-product.webp`}
+        src={`/../assets/products/${sku}-${hovered ? 2 : 1}-product.webp`}
         alt={sku}
       />
       <p className="text-xl">{title}</p>
@@ -28,6 +30,7 @@ function Product({
         className={`w-full h-14 text-white  ${
           hovered ? "bg-yellow-400" : "bg-gray-800"
         }`}
+        onClick={() => onAddProductItemToCar(completeProduct)}
       >
         Add to cart
       </button>
