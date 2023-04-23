@@ -1,15 +1,40 @@
 import React from "react";
 import ProductInCart from "./ProductInCart";
+import classNames from "classnames";
 
 function ShoppingCar({
+  onshowShoppingCar,
   shoppingCar,
   onRemoveProductShoppingCar,
   onSumOrSubtract,
 }) {
   return (
-    <div className="w-full max-w-lg flex flex-col px-5">
-      <h1 className="text-2xl">ShoppingCar</h1>
-      <div>
+    <div
+      className={classNames(
+        onshowShoppingCar ? "opacity-0" : "opacity-100",
+        "text-white",
+        "fixed",
+        "top-0",
+        "h-screen",
+        "px-5",
+        "right-0",
+        "w-full",
+        "md:max-w-lg",
+        "h-screen",
+        "bg-gray-900",
+        "cursor-pointer",
+        "user-select-none",
+        "transition-transform ",
+        "ease-linear",
+        "opacity-100",
+        "dark:bg-gray-800",
+        " dark:text-white",
+        " dark:hover:bg-gray-700",
+        onshowShoppingCar ? "translate-x-0" : " translate-x-full"
+      )}
+    >
+      <h1 className="text-2xl pt-24 ">ShoppingCar</h1>
+      <div className="overflow-auto h-96 ">
         {shoppingCar.map((product, i) => (
           <div key={i}>
             <ProductInCart

@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { useState, useEffect } from "react";
 import ShowProducts from "./Components/ShowProducts";
 import dataArrButtons from "./data/dataArrButtons";
 import FilterButtons from "./Components/FilterButtons";
 import ShoppingCar from "./Components/ShoppingCar";
+import ButtonShowShoppingCart from "./Components/ButtonShowShoppingCart";
 
 function App() {
   const [products, setProducts] = useState([]);
   const [buttons, setButtons] = useState(dataArrButtons);
   const [sizes, setSizes] = useState([]);
   const [shoppingCar, setShoppingCar] = useState([]);
+  const [showShoppingCar, setShowShoppingCar] = useState(false);
 
   useEffect(() => {
     axios
@@ -44,6 +46,10 @@ function App() {
       : setShoppingCar([...shoppingCar, { ...product, quantify: 1 }]);
   }
 
+  function handleShowShoppingCar() {
+    setShowShoppingCar(!showShoppingCar);
+  }
+
   function onSumOrSubtract(skuValue, sumOrSubtract) {
     setShoppingCar(
       shoppingCar.map((itemShoppingCar) =>
@@ -64,22 +70,29 @@ function App() {
   }
 
   return (
-    <div className="flex items-start select-none mt-24">
-      <FilterButtons
-        dataButtons={buttons}
-        onHandleSizeClick={handleSizeClick}
+    <>
+      <ButtonShowShoppingCart
+        onShowShoppingCar={showShoppingCar}
+        onHandleShowShoppingCar={handleShowShoppingCar}
       />
-      <ShowProducts
-        dataShowProducts={products}
-        dataSizes={sizes}
-        onAddProductItemToCar={addProductItemToCar}
-      />
+      <div className="App md:items-start flex select-none mt-24 || max-md:flex-col items-center ">
+        <FilterButtons
+          dataButtons={buttons}
+          onHandleSizeClick={handleSizeClick}
+        />
+        <ShowProducts
+          dataShowProducts={products}
+          dataSizes={sizes}
+          onAddProductItemToCar={addProductItemToCar}
+        />
+      </div>
       <ShoppingCar
+        onshowShoppingCar={showShoppingCar}
         shoppingCar={shoppingCar}
         onRemoveProductShoppingCar={removeProductShoppingCar}
         onSumOrSubtract={onSumOrSubtract}
       />
-    </div>
+    </>
   );
 }
 
