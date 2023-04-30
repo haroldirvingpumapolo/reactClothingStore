@@ -32,7 +32,6 @@ function ShoppingCar({ onshowShoppingCar }) {
     >
       <h1 className="text-2xl pt-24 ">ShoppingCar</h1>
       <div className="overflow-auto h-96 ">
-        {console.log(cartItems)}
         {cartItems.map((product, i) => (
           <div key={i}>
             <ProductInCart
