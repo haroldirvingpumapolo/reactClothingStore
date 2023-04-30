@@ -1,13 +1,11 @@
 import React from "react";
 import ProductInCart from "./ProductInCart";
 import classNames from "classnames";
+import { useSelector } from "react-redux";
 
-function ShoppingCar({
-  onshowShoppingCar,
-  shoppingCar,
-  onRemoveProductShoppingCar,
-  onSumOrSubtract,
-}) {
+function ShoppingCar({ onshowShoppingCar }) {
+  const { cartItems } = useSelector((state) => state.cartReducer);
+
   return (
     <div
       className={classNames(
@@ -22,7 +20,6 @@ function ShoppingCar({
         "md:max-w-lg",
         "h-screen",
         "bg-gray-900",
-        "cursor-pointer",
         "user-select-none",
         "transition-transform ",
         "ease-linear",
@@ -35,18 +32,18 @@ function ShoppingCar({
     >
       <h1 className="text-2xl pt-24 ">ShoppingCar</h1>
       <div className="overflow-auto h-96 ">
-        {shoppingCar.map((product, i) => (
+        {console.log(cartItems)}
+        {cartItems.map((product, i) => (
           <div key={i}>
             <ProductInCart
               sku={product.sku}
               title={product.title}
-              availableSizes={product.availableSizes[0]}
+              availableSizes={product.availableSizes}
               style={product.style}
               currencyFormat={product.currencyFormat}
               price={product.price}
               quantify={product.quantify}
-              onRemoveProductShoppingCar={onRemoveProductShoppingCar}
-              onSumOrSubtract={onSumOrSubtract}
+              completeProduct={product}
             />
           </div>
         ))}
@@ -59,7 +56,7 @@ function ShoppingCar({
           <div className="flex flex-col items-end">
             <p className="text-4xl  text-yellow-400">
               $
-              {shoppingCar
+              {cartItems
                 .reduce(
                   (total, product) => total + product.price * product.quantify,
                   0
@@ -68,15 +65,15 @@ function ShoppingCar({
             </p>
             <p className="text-xl text-gray-400">
               OR UP TO{"  "}
-              {shoppingCar.length !== 0
+              {cartItems.length !== 0
                 ? (
-                    shoppingCar.reduce(
+                    cartItems.reduce(
                       (total, product) =>
                         total +
                         (product.price / product.installments) *
                           product.quantify,
                       0
-                    ) / shoppingCar.length
+                    ) / cartItems.length
                   ).toFixed(2)
                 : 0}
             </p>
@@ -87,7 +84,7 @@ function ShoppingCar({
           onClick={() =>
             alert(
               "Checkout - Subtotal: $ " +
-                shoppingCar
+                cartItems
                   .reduce(
                     (total, product) =>
                       total + product.price * product.quantify,
