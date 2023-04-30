@@ -37,7 +37,7 @@ function ShoppingCar({ onshowShoppingCar }) {
             <ProductInCart
               sku={product.sku}
               title={product.title}
-              availableSizes={product.availableSizes}
+              availableSizes={product.availableSizes[0]}
               style={product.style}
               currencyFormat={product.currencyFormat}
               price={product.price}
