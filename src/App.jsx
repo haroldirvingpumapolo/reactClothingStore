@@ -24,14 +24,14 @@ function App() {
   return (
     <>
       <ButtonShowShoppingCart
-        onShowShoppingCar={showShoppingCar}
-        onHandleShowShoppingCar={handleShowShoppingCar}
+        showShoppingCar={showShoppingCar}
+        onShowShoppingCar={handleShowShoppingCar}
       />
       <div className="App md:items-start flex select-none mt-24 max-md:flex-col max-md:items-center ">
         <FilterButtons />
         <ShowProducts />
       </div>
-      <ShoppingCar onshowShoppingCar={showShoppingCar} />
+      <ShoppingCar showShoppingCar={showShoppingCar} />
     </>
   );
 }

@@ -3,13 +3,13 @@ import ProductInCart from "./ProductInCart";
 import classNames from "classnames";
 import { useSelector } from "react-redux";
 
-function ShoppingCar({ onshowShoppingCar }) {
+function ShoppingCar({ showShoppingCar }) {
   const { cartItems } = useSelector((state) => state.cartReducer);
 
   return (
     <div
       className={classNames(
-        onshowShoppingCar ? "opacity-0" : "opacity-100",
+        showShoppingCar ? "opacity-0" : "opacity-100",
         "text-white",
         "fixed",
         "top-0",
@@ -27,7 +27,7 @@ function ShoppingCar({ onshowShoppingCar }) {
         "dark:bg-gray-800",
         " dark:text-white",
         " dark:hover:bg-gray-700",
-        onshowShoppingCar ? "translate-x-0" : " translate-x-full"
+        showShoppingCar ? "translate-x-0" : " translate-x-full"
       )}
     >
       <h1 className="text-2xl pt-24 ">ShoppingCar</h1>
