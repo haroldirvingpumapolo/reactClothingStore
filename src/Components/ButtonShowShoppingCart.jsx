@@ -1,10 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-function ButtonShowShoppingCart({
-  onShowShoppingCar,
-  onHandleShowShoppingCar,
-}) {
+function ButtonShowShoppingCart({ showShoppingCar, onShowShoppingCar }) {
   return (
     <div
       className={classNames(
@@ -24,11 +21,11 @@ function ButtonShowShoppingCart({
         "ease-linear",
         "transition-transform "
       )}
-      onClick={onHandleShowShoppingCar}
+      onClick={onShowShoppingCar}
     >
       <img
         className="w-6 h-6"
-        src={`/../${onShowShoppingCar ? "x-" : ""}carrito-de-compras.png`}
+        src={`/../${showShoppingCar ? "x-" : ""}carrito-de-compras.png`}
         alt="Logo"
       />
     </div>

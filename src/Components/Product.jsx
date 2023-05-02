@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/actions/actionsCart";
 
 function Product({
   sku,
@@ -6,9 +8,9 @@ function Product({
   currencyFormat,
   price,
   installments,
-  onAddProductItemToCar,
   completeProduct,
 }) {
+  const dispatch = useDispatch();
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -31,7 +33,7 @@ function Product({
         className={`w-full h-14 text-white  ${
           hovered ? "bg-yellow-400" : "bg-gray-800"
         }`}
-        onClick={() => onAddProductItemToCar(completeProduct)}
+        onClick={() => dispatch(addToCart(completeProduct))}
       >
         Add to cart
       </button>

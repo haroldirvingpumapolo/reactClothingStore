@@ -1,5 +1,7 @@
 import classNames from "classnames";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { decreaseQuantity, increaseQuantity, removeFromCart } from "../store/actions/actionsCart";
 
 function ProductInCart({
   sku,
@@ -9,16 +11,17 @@ function ProductInCart({
   currencyFormat,
   price,
   quantify,
-  onRemoveProductShoppingCar,
-  onSumOrSubtract,
+  completeProduct,
 }) {
+  const dispatch = useDispatch();
+
   return (
     <div className="w-full flex flex-col text-base p-2">
       <div className="flex justify-end w-full">
         <button
           className=" text-black font-bold"
           onClick={() => {
-            onRemoveProductShoppingCar(sku);
+            dispatch(removeFromCart(completeProduct));
           }}
         >
           X
@@ -34,7 +37,7 @@ function ProductInCart({
           <div className="flex flex-col content-around ">
             <p>{title}</p>
             <p>
-              {availableSizes[0]} | {style}
+              {availableSizes} | {style}
             </p>
             <p>Quantify: {quantify}</p>
           </div>
@@ -49,7 +52,7 @@ function ProductInCart({
                 quantify === 1 && "pointer-events-none"
               )}
               onClick={() => {
-                onSumOrSubtract(sku, -1);
+                dispatch(decreaseQuantity(completeProduct));
               }}
             >
               -
@@ -57,7 +60,7 @@ function ProductInCart({
             <button
               className="bg-black w-7 text-white"
               onClick={() => {
-                onSumOrSubtract(sku, +1);
+                dispatch(increaseQuantity(completeProduct));
               }}
             >
               +
