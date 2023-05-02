@@ -3,26 +3,26 @@ import classNames from "classnames";
 
 function FilterButtons({ dataButtons, onHandleSizeClick }) {
   return (
-    <div className="flex flex-col w-52 h-96 px-10">
+    <div className="flex flex-col md:h-96 px-10 max-md: h-32">
       <h1 className="text-xl"> Sizes:</h1>
-      <div>
+      <div className="flex md:flex-col ||max-md: w-full flex-row flex-wrap ">
         {dataButtons.map((button, i) => {
           return (
-            <div key={i}>
-              <button
-                className={classNames(
-                  "w-11",
-                  "h-10",
-                  "mb-5",
-                  "rounded-full",
-                  !button.select ? "bg-slate-300" : "bg-black ",
-                  !button.select ? "text-black" : "text-white "
-                )}
-                onClick={() => onHandleSizeClick(button.buttonValue)}
-              >
-                {button.buttonValue}
-              </button>
-            </div>
+            <button
+              key={i}
+              className={classNames(
+                "w-9",
+                "h-9",
+                "mb-5",
+                "rounded-full",
+                "mx-1",
+                !button.select ? "bg-slate-300" : "bg-black ",
+                !button.select ? "text-black" : "text-white "
+              )}
+              onClick={() => onHandleSizeClick(button.buttonValue)}
+            >
+              {button.buttonValue}
+            </button>
           );
         })}
       </div>

@@ -13,11 +13,12 @@ function Product({
 
   return (
     <div
-      className="max-w-xs flex flex-col justify-center items-center content-center py-6"
+      className=" flex flex-col justify-center items-center py-6"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <img
+        className="max-md:w-80 max-md:h-64 "
         src={`/../assets/products/${sku}-${hovered ? 2 : 1}-product.webp`}
         alt={sku}
       />
